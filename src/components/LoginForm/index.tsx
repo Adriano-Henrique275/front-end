@@ -39,9 +39,9 @@ export const LoginForm = () => {
 			/>
 
 			<LabeledInput
-				id='senha'
+				id='password'
 				label='Senha'
-				name='senha'
+				name='password'
 				placeholder='********'
 				type='password'
 				hasMarginTop={true}
