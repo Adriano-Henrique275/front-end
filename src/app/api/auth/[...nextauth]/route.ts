@@ -1,8 +1,5 @@
-import { connectDB } from '@/app/libs/mongodb';
-import User from '@/models/User';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
 
 const handler = NextAuth({
 	providers: [
@@ -24,8 +21,6 @@ const handler = NextAuth({
 				
 				const userFound = await fetch(`http://localhost:3000/users/email?email=${credentials?.email}`);
 				const userData = await userFound.json();
-
-				console.log(credentials?.password);
 
 				if (!userData) {
 					throw new Error('Credenciais inválidas');
