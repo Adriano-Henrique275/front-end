@@ -21,15 +21,13 @@ const handler = NextAuth({
 				},
 			},
 			async authorize(credentials, req) {
-				await connectDB();
+				
+				const userFound = await fetch(`http://localhost:3000/users/email?email=${credentials?.email}`);
+				const userData = await userFound.json();
 
-				const userFound = await User.findOne({
-					email: credentials?.email,
-				}).select('+password');
+				console.log(credentials?.password);
 
-				console.log(userFound);
-
-				if (!userFound) {
+				if (!userData) {
 					throw new Error('Credenciais inválidas');
 				}
 
@@ -39,11 +37,11 @@ const handler = NextAuth({
 					userFound.password
 				); */
 
-				if (credentials!.password !== userFound.password) {
+				if (credentials!.password !== userData.password) {
 					throw new Error('Credenciais inválidas');
 				}
 
-				return userFound;
+				return userData;
 			},
 		}),
 	],
