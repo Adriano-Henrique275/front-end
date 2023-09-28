@@ -9,6 +9,7 @@ export const SubHeader = () => {
 
 	const pathnameAssociations: { [key: string]: string } = {
 		'/cultures': 'Filtros',
+		'/monitor': 'Adicionar monitor',
 	};
 
 	return (

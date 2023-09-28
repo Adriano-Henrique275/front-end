@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { InputHTMLAttributes } from 'react';
 import * as S from './styles';
 import { Inter } from 'next/font/google';
 
@@ -7,32 +7,20 @@ const inter = Inter({
 	weight: ['400'],
 });
 
-interface LabeledInputProps {
+interface LabeledInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	label: string;
-	type?: HTMLInputTypeAttribute;
-	id: string;
-	name: string;
-	placeholder: string;
 	hasMarginTop?: boolean;
 }
 
 export const LabeledInput = ({
 	label,
-	type,
-	id,
-	placeholder,
-	name,
 	hasMarginTop,
+	...props
 }: LabeledInputProps) => {
 	return (
 		<S.InputContainer $hasMarginTop={hasMarginTop} className={inter.className}>
-			<S.Label htmlFor={id}>{label}</S.Label>
-			<S.Input
-				type={type || 'text'}
-				id={id}
-				name={name}
-				placeholder={placeholder}
-			/>
+			<S.Label htmlFor={props.id}>{label}</S.Label>
+			<S.Input {...props} />
 		</S.InputContainer>
 	);
 };
